@@ -141,6 +141,13 @@ export default function Landing() {
               </ul>
             </div>
           </section>
+
+          {/* Footer */}
+          <footer className="resume-section border-t border-slate-200 px-5 py-4 sm:px-10">
+            <p className="text-[10.5px] text-slate-500 sm:text-[10px]">
+              Copyright © 2026 by DUY NITA. All rights reserved.
+            </p>
+          </footer>
         </main>
 
         {/* ============================== SIDEBAR ============================== */}
@@ -231,6 +238,14 @@ export default function Landing() {
               <SidebarList
                 items={["Khmer — Mother Tongue", "English — Intermediate"]}
               />
+            </div>
+          </section>
+
+          {/* Hobbies & Interests */}
+          <section className="resume-section mt-7">
+            <SidebarHeading>Hobbies & Interests</SidebarHeading>
+            <div className="mt-3">
+              <SidebarList items={["Reading books", "Listening to music"]} />
             </div>
           </section>
         </aside>
