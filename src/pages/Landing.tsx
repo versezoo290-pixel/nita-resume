@@ -12,7 +12,7 @@ const PROFILE_IMG =
 
 function SidebarHeading({ children }: { children: ReactNode }) {
   return (
-    <h2 className="ribbon-heading inline-block bg-white px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-[#1b3a7a] sm:px-4 sm:text-[13px]">
+    <h2 className="ribbon-heading inline-block max-w-full bg-white px-3 py-1.5 text-[9.5px] font-bold uppercase tracking-[0.08em] text-[#1b3a7a] sm:px-4 sm:text-[13px] sm:tracking-[0.14em]">
       {children}
     </h2>
   );
@@ -20,7 +20,7 @@ function SidebarHeading({ children }: { children: ReactNode }) {
 
 function MainHeading({ children }: { children: ReactNode }) {
   return (
-    <h2 className="ribbon-heading inline-block bg-[#1b3a7a] px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-white sm:px-4 sm:text-[13px]">
+    <h2 className="ribbon-heading inline-block max-w-full bg-[#1b3a7a] px-3 py-1.5 text-[9.5px] font-bold uppercase tracking-[0.08em] text-white sm:px-4 sm:text-[13px] sm:tracking-[0.14em]">
       {children}
     </h2>
   );
@@ -28,7 +28,7 @@ function MainHeading({ children }: { children: ReactNode }) {
 
 function SidebarList({ items }: { items: string[] }) {
   return (
-    <ul className="space-y-1 text-[12px] leading-snug text-white/90 sm:text-[11px]">
+    <ul className="space-y-1 text-[11px] leading-snug text-white/90">
       {items.map((item) => (
         <li key={item} className="flex gap-1.5">
           <span className="mt-[6px] size-1 shrink-0 rounded-full bg-white/80" />
@@ -44,26 +44,26 @@ function SidebarList({ items }: { items: string[] }) {
 export default function Landing() {
   return (
     <div className="print-reset min-h-screen bg-slate-200 sm:px-4 sm:py-8">
-      {/* A4 sheet — stacked on phones, side-by-side from sm up; print keeps A4 */}
-      <div className="resume-sheet mx-auto flex flex-col bg-white shadow-[0_2px_8px_rgba(0,0,0,0.12),0_16px_48px_rgba(0,0,0,0.12)] sm:flex-row">
+      {/* A4 sheet — two-column at every width; phone gets compact sizing */}
+      <div className="resume-sheet mx-auto flex bg-white shadow-[0_2px_8px_rgba(0,0,0,0.12),0_16px_48px_rgba(0,0,0,0.12)]">
         {/* ============================ MAIN COLUMN ============================ */}
-        <main className="w-full shrink-0 sm:w-[62%]">
+        <main className="w-[55%] shrink-0 sm:w-[62%]">
           {/* Name header */}
-          <div className="px-5 pb-5 pt-7 sm:px-10 sm:pb-6 sm:pt-10">
-            <h1 className="font-display text-[27px] font-extrabold uppercase leading-[1.05] tracking-tight text-[#1b3a7a] sm:text-[34px]">
+          <div className="px-4 pb-4 pt-6 sm:px-10 sm:pb-6 sm:pt-10">
+            <h1 className="font-display text-[24px] font-extrabold uppercase leading-[1.05] tracking-tight text-[#1b3a7a] sm:text-[34px]">
               Duy Nita
             </h1>
-            <p className="font-display mt-1.5 text-[12px] font-semibold uppercase tracking-[0.18em] text-[#2563eb] sm:text-[15px] sm:tracking-[0.28em]">
+            <p className="font-display mt-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#2563eb] sm:text-[15px] sm:tracking-[0.28em]">
               Call Center Agent
             </p>
           </div>
 
           {/* Contact strip */}
-          <div className="bg-[#1b3a7a] px-5 py-3.5 sm:px-10 sm:py-4">
-            <p className="font-display text-[11px] font-bold uppercase tracking-[0.2em] text-white sm:text-[13px]">
+          <div className="bg-[#1b3a7a] px-4 py-3 sm:px-10 sm:py-4">
+            <p className="font-display text-[10.5px] font-bold uppercase tracking-[0.2em] text-white sm:text-[13px]">
               Contact
             </p>
-            <div className="mt-2.5 flex flex-wrap gap-x-6 gap-y-2 text-[11px] text-white/90 sm:gap-x-10">
+            <div className="mt-2.5 flex flex-wrap gap-x-4 gap-y-2 text-[10px] text-white/90 sm:gap-x-10 sm:text-[11px]">
               <span className="flex items-center gap-2">
                 <Phone className="size-3.5 shrink-0" /> (855) 97 350 9225
               </span>
@@ -77,9 +77,9 @@ export default function Landing() {
           </div>
 
           {/* Profile */}
-          <section className="resume-section px-5 py-5 sm:px-10 sm:py-6">
+          <section className="resume-section px-4 py-4 sm:px-10 sm:py-6">
             <MainHeading>Profile</MainHeading>
-            <p className="mt-4 text-[12.5px] leading-relaxed text-slate-700 sm:text-[11.5px]">
+            <p className="mt-4 text-[11px] leading-relaxed text-slate-700 sm:text-[11.5px]">
               Dedicated Call Center Agent with experience handling customer
               inquiries, resolving complaints, and keeping records accurate in a
               fast-paced support environment. Information Technology student who
@@ -90,17 +90,17 @@ export default function Landing() {
           </section>
 
           {/* Experience */}
-          <section className="resume-section px-5 py-5 sm:px-10 sm:py-6">
+          <section className="resume-section px-4 py-4 sm:px-10 sm:py-6">
             <MainHeading>Experience</MainHeading>
             <div className="mt-4">
-              <h3 className="text-[13px] font-bold text-[#1b3a7a] sm:text-[12.5px]">
+              <h3 className="text-[12px] font-bold text-[#1b3a7a] sm:text-[12.5px]">
                 Call Center Agent
               </h3>
-              <p className="text-[11.5px] text-slate-600 sm:text-[11px]">
+              <p className="text-[10.5px] text-slate-600 sm:text-[11px]">
                 Today Solution, Stueng Meanchey{" "}
                 <span className="text-slate-500">| 18/07/2025 — Present</span>
               </p>
-              <ul className="mt-2 space-y-1 text-[12px] leading-relaxed text-slate-700 sm:text-[11px]">
+              <ul className="mt-2 space-y-1 text-[11px] leading-relaxed text-slate-700">
                 {[
                   "Handled customer inquiries and provided accurate information regarding services.",
                   "Resolved customer complaints efficiently while maintaining a professional attitude.",
@@ -116,17 +116,17 @@ export default function Landing() {
           </section>
 
           {/* Education */}
-          <section className="resume-section px-5 py-5 sm:px-10 sm:py-6">
+          <section className="resume-section px-4 py-4 sm:px-10 sm:py-6">
             <MainHeading>Education</MainHeading>
             <div className="mt-4">
-              <h3 className="text-[13px] font-bold text-[#1b3a7a] sm:text-[12.5px]">
+              <h3 className="text-[12px] font-bold text-[#1b3a7a] sm:text-[12.5px]">
                 Year 1 — Information Technology
               </h3>
-              <p className="text-[11.5px] text-slate-600 sm:text-[11px]">
+              <p className="text-[10.5px] text-slate-600 sm:text-[11px]">
                 Royal University of Phnom Penh{" "}
                 <span className="text-slate-500">| Present</span>
               </p>
-              <ul className="mt-2 space-y-1 text-[12px] leading-relaxed text-slate-700 sm:text-[11px]">
+              <ul className="mt-2 space-y-1 text-[11px] leading-relaxed text-slate-700">
                 {[
                   "Passed BacII Examination — 2024",
                   "Mreasprow High School — 2021 to 2023",
@@ -143,7 +143,7 @@ export default function Landing() {
           </section>
 
           {/* Footer */}
-          <footer className="resume-section border-t border-slate-200 px-5 py-4 sm:px-10">
+          <footer className="resume-section border-t border-slate-200 px-4 py-3.5 sm:px-10">
             <p className="text-[10.5px] text-slate-500 sm:text-[10px]">
               Copyright © 2026 by DUY NITA. All rights reserved.
             </p>
@@ -152,7 +152,7 @@ export default function Landing() {
 
         {/* ============================== SIDEBAR ============================== */}
         <aside
-          className="w-full shrink-0 px-5 pb-9 pt-7 text-white sm:w-[38%] sm:px-7 sm:pb-10 sm:pt-8"
+          className="w-[45%] shrink-0 px-3 pb-8 pt-6 text-white sm:w-[38%] sm:px-7 sm:pb-10 sm:pt-8"
           style={{
             background: `linear-gradient(180deg, ${NAVY} 0%, ${NAVY_DARK} 100%)`,
           }}
@@ -165,7 +165,7 @@ export default function Landing() {
                 alt="Duy Nita"
                 width={150}
                 height={150}
-                className="size-[120px] rounded-full object-cover sm:size-[150px]"
+                className="size-[min(150px,30vw)] rounded-full object-cover"
               />
             </div>
           </div>
@@ -173,9 +173,9 @@ export default function Landing() {
           {/* Technical skills */}
           <section className="resume-section mt-8">
             <SidebarHeading>Technical Skills</SidebarHeading>
-            <div className="mt-3 grid grid-cols-1 gap-y-3 sm:grid-cols-2 sm:gap-x-4">
+            <div className="mt-3 grid grid-cols-2 gap-x-4">
               <div>
-                <p className="text-[12px] font-bold text-white sm:text-[11px]">
+                <p className="text-[11px] font-bold text-white">
                   Software
                 </p>
                 <div className="mt-1.5">
@@ -189,7 +189,7 @@ export default function Landing() {
                 </div>
               </div>
               <div>
-                <p className="text-[12px] font-bold text-white sm:text-[11px]">
+                <p className="text-[11px] font-bold text-white">
                   Technical
                 </p>
                 <div className="mt-1.5">
