@@ -1,14 +1,17 @@
-import { motion } from "framer-motion";
 import type { ReactNode } from "react";
 import {
-  Printer,
-  MapPin,
   Phone,
   Mail,
-  GraduationCap,
   Globe,
+  MapPin,
+  Printer,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+
+/* Colors match the reference: navy sidebar + white main column + blue accents */
+const NAVY = "#1b3a7a";
+const NAVY_DARK = "#162f63";
+const BLUE = "#2563eb";
 
 const PROFILE_IMG =
   "https://api.dicebear.com/10.x/initials/svg?seed=DUY%20NITA";
@@ -21,74 +24,67 @@ function handlePrint() {
   }
 }
 
-function SectionHeading({ children }: { children: ReactNode }) {
+/* ------------------------------ building blocks ----------------------------- */
+
+function SidebarHeading({ children }: { children: ReactNode }) {
   return (
-    <h2 className="text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+    <h2 className="ribbon-heading inline-block bg-white px-4 py-1.5 text-[13px] font-bold uppercase tracking-[0.14em] text-[#1b3a7a]">
       {children}
     </h2>
   );
 }
 
-function Divider() {
-  return <div className="mt-2.5 h-px bg-border" />;
+function MainHeading({ children }: { children: ReactNode }) {
+  return (
+    <h2 className="ribbon-heading inline-block bg-[#1b3a7a] px-4 py-1.5 text-[13px] font-bold uppercase tracking-[0.14em] text-white">
+      {children}
+  </h2>
+  );
 }
 
-const personalInfo: [string, string][] = [
-  ["Full Name", "DUY NITA"],
-  ["Gender", "Female"],
-  ["Date of Birth", "April 08, 2007"],
-  ["Nationality", "Cambodian"],
-  ["Marital Status", "Single"],
-  ["Place of Birth", "Daunyoy, Daunyoy Commune, Chhuk District, Kampot Province"],
-];
+function ContactRow({
+  icon,
+  children,
+}: {
+  icon: ReactNode;
+  children: ReactNode;
+}) {
+  return (
+    <div className="flex items-start gap-2.5 text-[11px] leading-relaxed text-white/90">
+      <span className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full border border-white/40">
+        {icon}
+      </span>
+      <span className="pt-1.5">{children}</span>
+    </div>
+  );
+}
 
-const education = [
-  {
-    period: "Present",
-    title: "Year 1 — Information Technology",
-    place: "Royal University of Phnom Penh",
-  },
-  { period: "2024", title: "Passed BacII Examination", place: "" },
-  { period: "2021 — 2023", title: "High School", place: "Mreasprow High School" },
-  {
-    period: "2018 — 2021",
-    title: "Secondary School",
-    place: "Chhuk Secondary School",
-  },
-  { period: "2012 — 2018", title: "Primary School", place: "Chhuk Primary School" },
-];
+function SidebarList({ items }: { items: string[] }) {
+  return (
+    <ul className="space-y-1 text-[11px] leading-snug text-white/90">
+      {items.map((item) => (
+        <li key={item} className="flex gap-1.5">
+          <span className="mt-[6px] size-1 shrink-0 rounded-full bg-white/80" />
+          {item}
+        </li>
+      ))}
+    </ul>
+  );
+}
 
-const languages = [
-  { name: "Khmer", level: "Mother Tongue", width: "100%" },
-  { name: "English", level: "Intermediate", width: "55%" },
-];
-
-const experience = {
-  company: "Today Solution, Stueng Meanchey",
-  role: "Call Center Agent",
-  period: "18/07/2025 — Present",
-  bullets: [
-    "Handled customer inquiries and provided accurate information regarding services.",
-    "Resolved customer complaints efficiently while maintaining a professional attitude.",
-    "Logged call details and updated customer records in the system.",
-  ],
-};
-
-const hobbies = ["Reading books", "Listening to music"];
+/* ---------------------------------- page ----------------------------------- */
 
 export default function Landing() {
   return (
-    <div className="print-reset min-h-screen bg-muted/40 px-4 py-8 sm:py-12">
+    <div className="print-reset min-h-screen bg-slate-200 px-4 py-8 sm:py-12">
       {/* Toolbar */}
       <div className="no-print mx-auto mb-8 flex w-full max-w-[210mm] items-center justify-between">
-        <p className="text-xs tracking-wide text-muted-foreground">
-          Résumé — A4
-        </p>
+        <p className="text-xs tracking-wide text-slate-600">Résumé — A4</p>
         <Button
           onClick={handlePrint}
           variant="outline"
           size="sm"
-          className="rounded-none border-foreground/20 bg-white text-foreground hover:bg-foreground hover:text-background"
+          className="rounded-none border-slate-300 bg-white text-slate-800 hover:bg-slate-800 hover:text-white"
         >
           <Printer className="size-3.5" />
           Print / Save as PDF
@@ -96,205 +92,202 @@ export default function Landing() {
       </div>
 
       {/* A4 sheet */}
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className="resume-sheet mx-auto bg-white px-[18mm] py-[16mm] text-foreground shadow-[0_1px_3px_rgba(0,0,0,0.08),0_12px_40px_rgba(0,0,0,0.06)]"
-      >
-        {/* Header */}
-        <header className="resume-section flex items-start justify-between gap-8">
-          <div>
-            <h1 className="font-display text-4xl font-medium tracking-tight">
-              DUY NITA
+      <div className="resume-sheet mx-auto flex bg-white shadow-[0_2px_8px_rgba(0,0,0,0.12),0_16px_48px_rgba(0,0,0,0.12)]">
+        {/* ============================ MAIN COLUMN ============================ */}
+        <main className="w-[62%] shrink-0">
+          {/* Name header */}
+          <div className="px-10 pb-6 pt-10">
+            <h1 className="font-display text-[34px] font-extrabold uppercase leading-[1.05] tracking-tight text-[#1b3a7a]">
+              Duy Nita
             </h1>
-            <p className="mt-2 text-sm tracking-wide text-muted-foreground">
+            <p className="font-display mt-1.5 text-[15px] font-semibold uppercase tracking-[0.28em] text-[#2563eb]">
               Call Center Agent
             </p>
-            <div className="mt-6 space-y-2 text-[13px] leading-relaxed text-foreground/80">
-              <p className="flex items-start gap-2.5">
-                <MapPin className="mt-0.5 size-3.5 shrink-0 text-muted-foreground" />
-                <span>
-                  Trpeang Tonle, Daunyoy Commune, Chhuk District, Kampot Province
-                </span>
-              </p>
-              <p className="flex items-center gap-2.5">
-                <Phone className="size-3.5 shrink-0 text-muted-foreground" />
-                <span>(855) 97 350 9225</span>
-              </p>
-              <p className="flex items-center gap-2.5">
-                <Mail className="size-3.5 shrink-0 text-muted-foreground" />
-                <a
-                  href="mailto:duynita1@gmail.com"
-                  className="underline-offset-4 hover:underline"
-                >
-                  duynita1@gmail.com
-                </a>
-              </p>
+          </div>
+
+          {/* Contact strip */}
+          <div className="bg-[#1b3a7a] px-10 py-4">
+            <p className="font-display text-[13px] font-bold uppercase tracking-[0.2em] text-white">
+              Contact
+            </p>
+            <div className="mt-2.5 flex flex-wrap gap-x-10 gap-y-2 text-[11px] text-white/90">
+              <span className="flex items-center gap-2">
+                <Phone className="size-3.5" /> (855) 97 350 9225
+              </span>
+              <span className="flex items-center gap-2">
+                <Mail className="size-3.5" /> duynita1@gmail.com
+              </span>
+              <span className="flex items-center gap-2">
+                <MapPin className="size-3.5" /> Kampot Province, Cambodia
+              </span>
             </div>
           </div>
-          <img
-            src={PROFILE_IMG}
-            alt="Duy Nita"
-            width={88}
-            height={88}
-            className="size-[88px] shrink-0 rounded-full border border-border object-cover grayscale"
-          />
-        </header>
 
-        <div className="my-10 h-px bg-border" />
+          {/* Profile */}
+          <section className="resume-section px-10 py-6">
+            <MainHeading>Profile</MainHeading>
+            <p className="mt-4 text-[11.5px] leading-relaxed text-slate-700">
+              Dedicated Call Center Agent with experience handling customer
+              inquiries, resolving complaints, and keeping records accurate in a
+              fast-paced support environment. Information Technology student who
+              enjoys problem-solving, working in teams, presenting clearly, and
+              writing technical documentation. Focused on professional, patient
+              service and continuous learning.
+            </p>
+          </section>
 
-        {/* Two-column body */}
-        <div className="grid grid-cols-1 gap-x-12 gap-y-10 md:grid-cols-[1.6fr_1fr]">
-          {/* Left column */}
-          <div className="space-y-10">
-            {/* Experience */}
-            <section className="resume-section">
-              <SectionHeading>Experience</SectionHeading>
-              <Divider />
-              <div className="mt-4">
-                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                  <h3 className="text-sm font-medium">
-                    {experience.role}
-                    <span className="text-muted-foreground">
-                      {" "}
-                      · {experience.company}
-                    </span>
-                  </h3>
-                  <span className="text-[11px] tabular-nums text-muted-foreground">
-                    {experience.period}
-                  </span>
-                </div>
-                <ul className="mt-3 space-y-1.5">
-                  {experience.bullets.map((b) => (
-                    <li
-                      key={b}
-                      className="flex gap-3 text-[13px] leading-relaxed text-foreground/80"
-                    >
-                      <span className="mt-[7px] size-1 shrink-0 rounded-full bg-muted-foreground/50" />
-                      {b}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </section>
-
-            {/* Education */}
-            <section className="resume-section">
-              <SectionHeading>Education</SectionHeading>
-              <Divider />
-              <div className="mt-4 space-y-4">
-                {education.map((e) => (
-                  <div key={e.period} className="flex gap-4">
-                    <span className="w-24 shrink-0 pt-0.5 text-[11px] tabular-nums text-muted-foreground">
-                      {e.period}
-                    </span>
-                    <div>
-                      <p className="text-[13px] font-medium leading-snug">
-                        {e.title}
-                      </p>
-                      {e.place && (
-                        <p className="text-[12px] text-muted-foreground">
-                          {e.place}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            {/* Skills */}
-            <section className="resume-section">
-              <SectionHeading>Skills &amp; Technical Abilities</SectionHeading>
-              <Divider />
-              <dl className="mt-4 space-y-2.5 text-[13px] leading-relaxed">
+          {/* Experience */}
+          <section className="resume-section px-10 py-6">
+            <MainHeading>Experience</MainHeading>
+            <div className="mt-4">
+              <h3 className="text-[12.5px] font-bold text-[#1b3a7a]">
+                Call Center Agent
+              </h3>
+              <p className="text-[11px] text-slate-600">
+                Today Solution, Stueng Meanchey{" "}
+                <span className="text-slate-500">
+                  | 18/07/2025 — Present
+                </span>
+              </p>
+              <ul className="mt-2 space-y-1 text-[11px] leading-relaxed text-slate-700">
                 {[
-                  ["Software", "Microsoft Word, Excel, PowerPoint"],
-                  ["Technical", "HTML, CSS, JavaScript, Responsive Web Design"],
-                  [
-                    "Soft Skills",
-                    "Problem-solving, Teamwork, Presentation, Technical Writing",
-                  ],
-                ].map(([k, v]) => (
-                  <div key={k} className="flex gap-4">
-                    <dt className="w-24 shrink-0 text-muted-foreground">{k}</dt>
-                    <dd className="text-foreground/80">{v}</dd>
-                  </div>
-                ))}
-              </dl>
-            </section>
-          </div>
-
-          {/* Right column */}
-          <div className="space-y-10 md:border-l md:border-border md:pl-10">
-            {/* Personal Information */}
-            <section className="resume-section">
-              <SectionHeading>Personal</SectionHeading>
-              <Divider />
-              <dl className="mt-4 space-y-2.5 text-[12px] leading-relaxed">
-                {personalInfo.map(([k, v]) => (
-                  <div key={k}>
-                    <dt className="text-muted-foreground">{k}</dt>
-                    <dd className="text-foreground/85">{v}</dd>
-                  </div>
-                ))}
-              </dl>
-            </section>
-
-            {/* Languages */}
-            <section className="resume-section">
-              <SectionHeading>Languages</SectionHeading>
-              <Divider />
-              <div className="mt-4 space-y-3.5">
-                {languages.map((l) => (
-                  <div key={l.name}>
-                    <div className="flex items-baseline justify-between text-[12px]">
-                      <span className="font-medium">{l.name}</span>
-                      <span className="text-muted-foreground">{l.level}</span>
-                    </div>
-                    <div className="mt-1.5 h-px w-full bg-border">
-                      <div
-                        className="h-px bg-foreground/50"
-                        style={{ width: l.width }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            {/* Hobbies */}
-            <section className="resume-section">
-              <SectionHeading>Interests</SectionHeading>
-              <Divider />
-              <ul className="mt-4 space-y-1.5 text-[13px] text-foreground/80">
-                {hobbies.map((h) => (
-                  <li key={h} className="flex items-center gap-3">
-                    <span className="size-1 rounded-full bg-muted-foreground/50" />
-                    {h}
+                  "Handled customer inquiries and provided accurate information regarding services.",
+                  "Resolved customer complaints efficiently while maintaining a professional attitude.",
+                  "Logged call details and updated customer records in the system.",
+                ].map((b) => (
+                  <li key={b} className="flex gap-2">
+                    <span className="mt-[6px] size-1 shrink-0 rounded-full bg-slate-500" />
+                    {b}
                   </li>
                 ))}
               </ul>
-            </section>
-          </div>
-        </div>
+            </div>
+          </section>
 
-        {/* Footer */}
-        <footer className="resume-section mt-14 border-t border-border pt-5">
-          <p className="text-[11px] text-muted-foreground">
-            Copyright © 2026 by DUY NITA. All rights reserved.
-          </p>
-        </footer>
-      </motion.div>
+          {/* Education */}
+          <section className="resume-section px-10 py-6">
+            <MainHeading>Education</MainHeading>
+            <div className="mt-4">
+              <h3 className="text-[12.5px] font-bold text-[#1b3a7a]">
+                Year 1 — Information Technology
+              </h3>
+              <p className="text-[11px] text-slate-600">
+                Royal University of Phnom Penh{" "}
+                <span className="text-slate-500">| Present</span>
+              </p>
+              <ul className="mt-2 space-y-1 text-[11px] leading-relaxed text-slate-700">
+                {[
+                  "Passed BacII Examination — 2024",
+                  "Mreasprow High School — 2021 to 2023",
+                  "Chhuk Secondary School — 2018 to 2021",
+                  "Chhuk Primary School — 2012 to 2018",
+                ].map((e) => (
+                  <li key={e} className="flex gap-2">
+                    <span className="mt-[6px] size-1 shrink-0 rounded-full bg-slate-500" />
+                    {e}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        </main>
+
+        {/* ============================== SIDEBAR ============================== */}
+        <aside
+          className="w-[38%] shrink-0 px-7 pb-10 pt-8 text-white"
+          style={{
+            background: `linear-gradient(180deg, ${NAVY} 0%, ${NAVY_DARK} 100%)`,
+          }}
+        >
+          {/* Circular photo */}
+          <div className="flex justify-center">
+            <div className="rounded-full bg-white p-1.5 shadow-lg">
+              <img
+                src={PROFILE_IMG}
+                alt="Duy Nita"
+                width={150}
+                height={150}
+                className="size-[150px] rounded-full object-cover"
+              />
+            </div>
+          </div>
+
+          {/* Technical skills */}
+          <section className="resume-section mt-8">
+            <SidebarHeading>Technical Skills</SidebarHeading>
+            <div className="mt-3 grid grid-cols-2 gap-x-4 gap-y-3">
+              <div>
+                <p className="text-[11px] font-bold text-white">Software</p>
+                <div className="mt-1.5">
+                  <SidebarList
+                    items={[
+                      "Microsoft Word",
+                      "Microsoft Excel",
+                      "Microsoft PowerPoint",
+                    ]}
+                  />
+                </div>
+              </div>
+              <div>
+                <p className="text-[11px] font-bold text-white">Technical</p>
+                <div className="mt-1.5">
+                  <SidebarList
+                    items={["HTML & CSS", "JavaScript", "Responsive Design"]}
+                  />
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Soft skills */}
+          <section className="resume-section mt-7">
+            <SidebarHeading>Soft Skills</SidebarHeading>
+            <div className="mt-3">
+              <SidebarList
+                items={[
+                  "Problem Solving",
+                  "Teamwork",
+                  "Presentation",
+                  "Technical Writing",
+                ]}
+              />
+            </div>
+          </section>
+
+          {/* Personal information */}
+          <section className="resume-section mt-7">
+            <SidebarHeading>Personal</SidebarHeading>
+            <div className="mt-3">
+              <SidebarList
+                items={[
+                  "Female · Born April 08, 2007",
+                  "Cambodian nationality",
+                  "Single",
+                  "Born in Daunyoy, Chhuk District, Kampot",
+                ]}
+              />
+            </div>
+          </section>
+
+          {/* Languages */}
+          <section className="resume-section mt-7">
+            <SidebarHeading>Languages</SidebarHeading>
+            <div className="mt-3">
+              <SidebarList
+                items={[
+                  "Khmer — Mother Tongue",
+                  "English — Intermediate",
+                ]}
+              />
+            </div>
+          </section>
+        </aside>
+      </div>
 
       {/* Bottom hint */}
-      <p className="no-print mx-auto mt-8 max-w-[210mm] text-center text-[11px] text-muted-foreground">
-        <GraduationCap className="mr-1 inline size-3.5 align-[-3px]" />
-        Currently studying Information Technology at the Royal University of
-        Phnom Penh ·
-        <Globe className="ml-1 mr-1 inline size-3.5 align-[-3px]" />
-        Kampot, Cambodia
+      <p className="no-print mx-auto mt-8 max-w-[210mm] text-center text-[11px] text-slate-600">
+        Print at A4, default margins, with background graphics enabled for the
+        full layout.
       </p>
     </div>
   );
