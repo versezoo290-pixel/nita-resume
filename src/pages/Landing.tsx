@@ -1,17 +1,11 @@
 import type { ReactNode } from "react";
-import {
-  Phone,
-  Mail,
-  Globe,
-  MapPin,
-  Printer,
-} from "lucide-react";
+import { Phone, Mail, MapPin, Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 /* Colors match the reference: navy sidebar + white main column + blue accents */
 const NAVY = "#1b3a7a";
 const NAVY_DARK = "#162f63";
-const BLUE = "#2563eb";
+const ACCENT = "#2563eb";
 
 const PROFILE_IMG =
   "https://api.dicebear.com/10.x/initials/svg?seed=DUY%20NITA";
@@ -38,24 +32,7 @@ function MainHeading({ children }: { children: ReactNode }) {
   return (
     <h2 className="ribbon-heading inline-block bg-[#1b3a7a] px-4 py-1.5 text-[13px] font-bold uppercase tracking-[0.14em] text-white">
       {children}
-  </h2>
-  );
-}
-
-function ContactRow({
-  icon,
-  children,
-}: {
-  icon: ReactNode;
-  children: ReactNode;
-}) {
-  return (
-    <div className="flex items-start gap-2.5 text-[11px] leading-relaxed text-white/90">
-      <span className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full border border-white/40">
-        {icon}
-      </span>
-      <span className="pt-1.5">{children}</span>
-    </div>
+    </h2>
   );
 }
 
@@ -145,9 +122,7 @@ export default function Landing() {
               </h3>
               <p className="text-[11px] text-slate-600">
                 Today Solution, Stueng Meanchey{" "}
-                <span className="text-slate-500">
-                  | 18/07/2025 — Present
-                </span>
+                <span className="text-slate-500">| 18/07/2025 — Present</span>
               </p>
               <ul className="mt-2 space-y-1 text-[11px] leading-relaxed text-slate-700">
                 {[
@@ -274,10 +249,7 @@ export default function Landing() {
             <SidebarHeading>Languages</SidebarHeading>
             <div className="mt-3">
               <SidebarList
-                items={[
-                  "Khmer — Mother Tongue",
-                  "English — Intermediate",
-                ]}
+                items={["Khmer — Mother Tongue", "English — Intermediate"]}
               />
             </div>
           </section>
