@@ -254,12 +254,6 @@ export default function Landing() {
           </section>
         </aside>
       </div>
-
-      {/* Bottom hint */}
-      <p className="no-print mx-auto mt-8 max-w-[210mm] text-center text-[11px] text-slate-600">
-        Print at A4, default margins, with background graphics enabled for the
-        full layout.
-      </p>
     </div>
   );
 }
