@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 /* Colors match the reference: navy sidebar + white main column + blue accents */
 const NAVY = "#1b3a7a";
 const NAVY_DARK = "#162f63";
-const ACCENT = "#2563eb";
 
 const PROFILE_IMG =
   "https://api.dicebear.com/10.x/initials/svg?seed=DUY%20NITA";
