@@ -145,16 +145,9 @@
   min-height: 297mm;
 }
 
-/* Screen only: below ~A4 width the sheet fills the viewport. The column
-   stacking itself is handled with flex-col sm:flex-row in Landing.tsx; in
-   print the viewport is the A4 page (~794px), so the sm+ two-column layout
-   always applies on paper. */
-@media screen and (max-width: 860px) {
-  .resume-sheet {
-    width: 100%;
-    min-height: auto;
-  }
-}
+/* One identical layout at every screen size: the sheet keeps its A4 width and
+   Landing.tsx scales it down on narrow screens (CSS zoom), so phones show the
+   same design as the laptop, just fitted to the screen. */
 
 .resume-section {
   break-inside: avoid;
@@ -186,6 +179,7 @@
     width: 210mm !important;
     min-height: 297mm !important;
     margin: 0 !important;
+    zoom: 1 !important;
     border-radius: 0 !important;
     box-shadow: none !important;
     outline: none !important;
