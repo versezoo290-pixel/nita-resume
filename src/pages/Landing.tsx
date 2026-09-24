@@ -1,6 +1,13 @@
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
-import { Printer, MapPin, Phone, Mail, GraduationCap, Globe } from "lucide-react";
+import {
+  Printer,
+  MapPin,
+  Phone,
+  Mail,
+  GraduationCap,
+  Globe,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const PROFILE_IMG =
@@ -32,10 +39,7 @@ const personalInfo: [string, string][] = [
   ["Date of Birth", "April 08, 2007"],
   ["Nationality", "Cambodian"],
   ["Marital Status", "Single"],
-  [
-    "Place of Birth",
-    "Daunyoy, Daunyoy Commune, Chhuk District, Kampot Province",
-  ],
+  ["Place of Birth", "Daunyoy, Daunyoy Commune, Chhuk District, Kampot Province"],
 ];
 
 const education = [
@@ -46,7 +50,11 @@ const education = [
   },
   { period: "2024", title: "Passed BacII Examination", place: "" },
   { period: "2021 — 2023", title: "High School", place: "Mreasprow High School" },
-  { period: "2018 — 2021", title: "Secondary School", place: "Chhuk Secondary School" },
+  {
+    period: "2018 — 2021",
+    title: "Secondary School",
+    place: "Chhuk Secondary School",
+  },
   { period: "2012 — 2018", title: "Primary School", place: "Chhuk Primary School" },
 ];
 
@@ -70,7 +78,7 @@ const hobbies = ["Reading books", "Listening to music"];
 
 export default function Landing() {
   return (
-    <div className="print-reset min-h-screen bg-muted/40 py-8 px-4 sm:py-12">
+    <div className="print-reset min-h-screen bg-muted/40 px-4 py-8 sm:py-12">
       {/* Toolbar */}
       <div className="no-print mx-auto mb-8 flex w-full max-w-[210mm] items-center justify-between">
         <p className="text-xs tracking-wide text-muted-foreground">
@@ -107,8 +115,7 @@ export default function Landing() {
               <p className="flex items-start gap-2.5">
                 <MapPin className="mt-0.5 size-3.5 shrink-0 text-muted-foreground" />
                 <span>
-                  Trpeang Tonle, Daunyoy Commune, Chhuk District, Kampot
-                  Province
+                  Trpeang Tonle, Daunyoy Commune, Chhuk District, Kampot Province
                 </span>
               </p>
               <p className="flex items-center gap-2.5">
@@ -289,7 +296,6 @@ export default function Landing() {
         <Globe className="ml-1 mr-1 inline size-3.5 align-[-3px]" />
         Kampot, Cambodia
       </p>
-
     </div>
   );
 }
